@@ -12,9 +12,9 @@ By the mid of 2019 there exist a large number of various proof systems that have
 
 One problem with recursive cycles in that curves with 128 bits of security require operations in ~700 bit fields and ~700 bit groups. Also a search for such curves is non-trivial, taking into account additional requirements like high 2-adicity or in general smooth multiplicative group structure.
 
-SHARKs construction was proposed by ZCash for purposes on aggregation of non-O(1) transparent proofs (w/o private coin setup). Ideal instantiation of such construction taking into account recursion would require one to find a set of curves like `BLS12 -> ? -> MNT4/6` or at least a pair `Curve -> MNT4/6` where `->` symbol means that base field of one curve is equal to the main group order of another curve to allow embedding. Unfortunately search for such combination of curves can be too difficult.
+SHARKs construction was proposed by ZCash for purposes on aggregation of non-O(1) transparent proofs (w/o private coin setup). This approach allows to find if private coin setup was compromised. Ideal instantiation of such construction taking into account recursion would require one to find a set of curves like `BLS12 -> ? -> MNT4/6` or at least a pair `Curve -> MNT4/6` where `->` symbol means that base field of one curve is equal to the main group order of another curve to allow embedding. Unfortunately search for such combination of curves can be too difficult.
 
-## Proposed solution
+## Proposed solution and concrete example
 
 There exist public coin proof systems that have verifier's work sublinear in "instance size" of the statement (circuit). Example of such proof system in Stark that requires verifier to only check polynomial constraints for a set of points that are provided by prover through the oracle (interactive oracle proof, IOP). Stark has O(polylog(n)) communication complexity that can be a problem if verification is done using e.g. a smart-contract in a public blockchain. In terms of requirements to instanciate Stark has only a prime field (here only Starks over prime fields are discussed) with large 2-adicity. Verifier's operations consist of verification of Merkle path's for elements provided by oracle and some arithmetic in a prime field for constraints verification and FRI protocol.
 
@@ -28,6 +28,14 @@ Such a simple structure of the verifier allows one to expect low complexity of a
 ## Problems
 
 Absence of an open and well-documented STARK prover does not allow immediate testing of such approach. Also, design of AIR arithmetization of the problem is much more challenging than design of R1CS arithemtization.
+
+## Hybridization with other proof systems
+
+In such approach one is largely limited by use of SNARKs as a "Layer 2" system to have all the benefits of succinctness and recursive cycles. 
+
+As for a Layer 1 one could think about use of Aurora proof system, that also requires only field operations and IOP verification by the verifier. Unfortunately, Aurora requires verifier to evaluate a polynomial of the degree equal to the number of variables in R1CS instance, that would lead to the circuit of Layer 2 statement to be in order of size of Layer 1 statement.
+
+If at some point other proof system (may be IOP based system) like Aurora is introduced for non-uniform circuits with, for example, verifier's work being logarithmic in the size of the arithmetization of original statement, such proof system could be immediately used for construction of a hybrid approach. But it also would lead to self-recursiveness in asumption of a proper hash function for IOP.
 
 ## Authors
 
