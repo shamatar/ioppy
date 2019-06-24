@@ -37,6 +37,10 @@ As for a Layer 1 one could think about use of Aurora proof system, that also req
 
 If at some point other proof system (may be IOP based system) like Aurora is introduced for non-uniform circuits with, for example, verifier's work being logarithmic in the size of the arithmetization of original statement, such proof system could be immediately used for construction of a hybrid approach. But it also would lead to self-recursiveness in asumption of a proper hash function for IOP.
 
+## Remarks
+
+- Verifier can be instantiated transparently due to public coin setup of the Layer 1 system. If Layer 2 system has universal setup (e.g. SONICs), then such approach can be viewed as "almost transparent"
+
 ## Authors
 
 Alex Vlasov, [@shamatar](https://github.com/shamatar),  alex.m.vlasov@gmail.com, Matter Labs
