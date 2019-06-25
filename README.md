@@ -10,11 +10,11 @@ In this document term "SNARKs" is used from time to time for proof systems that 
 
 This description is a result of my thoughts on hybrid practical systems that use `non-O(1)` proof-systems at what could be called "layer 1" and later use a `O(1)` proof systems on "layer 2" to make a succinct proofs of a statement that "For a given Layer 1 problem that has a corresponding verifier encoded into the statement of Layer 2 there was provided a valid proof that satisfied a verifier". In a nutshell - write a SNARK that internally verifies a Stark: all the IOP witness can be discarded as a private input to the SNARK, and Stark verifier equation is encoded as e.g. R1CS statement.
 
-This construction was also discussed with Ariel Gabizon, Daira Hopwood, Eran Tromer, Izaak Meckler and other during [ZCon 1](https://www.zfnd.org/zcon/1/) in Split, June 2019.
+This construction was also discussed with Ariel Gabizon, Daira Hopwood, Eran Tromer, Izaak Meckler and other during [Zcon 1](https://www.zfnd.org/zcon/1/) in Split, June 2019.
 
 ## Overview
 
-By the mid of 2019 there exist a large number of various proof systems that have a public coin (transparent, trustless) or private coin setup (private coin setup == trusted setup). Main advantage of proof system with a trusted setup is succinctness in proof size and verifier's work. Such systems are usually require pairing friendly curves and have interesting instantiations like recursive constructions (recursive SNARKs) or embedded curves (e.g. JubJub construction by [ZCash](https://z.cash) or instance from [Zexe](https://github.com/scipr-lab/zexe)). Recursive constructions are the most interesting that up to some simplification can aggregate proofs for very large set of statements.
+By the mid of 2019 there exist a large number of various proof systems that have a public coin (transparent, trustless) or private coin setup (private coin setup == trusted setup). Main advantage of proof system with a trusted setup is succinctness in proof size and verifier's work. Such systems are usually require pairing friendly curves and have interesting instantiations like recursive constructions (recursive SNARKs) or embedded curves (e.g. JubJub construction by [Zcash](https://z.cash) or instance from [Zexe](https://github.com/scipr-lab/zexe)). Recursive constructions are the most interesting that up to some simplification can aggregate proofs for very large set of statements.
 
 One problem with recursive cycles in that curves with 128 bits of security require operations in ~700 bit fields and ~700 bit groups. Also a search for such curves is non-trivial, taking into account additional requirements like high 2-adicity or in general smooth multiplicative group structure.
 
@@ -33,7 +33,7 @@ Such a simple structure of the verifier allows one to expect low complexity of a
 
 ## Problems
 
-Absence of an open and well-documented Stark prover does not allow immediate testing of such approach. Also, design of AIR arithmetization of the problem is much more challenging than design of R1CS arithemtization.
+Absence of an open and well-documented Stark prover does not allow immediate testing of such approach. Also, design of AIR arithmetization of the problem is much more challenging than design of R1CS arithmetization.
 
 ## Hybridization with other proof systems
 
